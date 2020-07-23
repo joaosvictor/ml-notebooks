@@ -1,5 +1,4 @@
-# Busy_beaver
 # Goal
-Solve the busy beaver problem in the best way possible 
+sources of researches of data(science/analyses) and ML 
 ## Find in:
-[LINK](https://catonmat.net/busy-beaver)
+[LINK of BB](https://catonmat.net/busy-beaver)
