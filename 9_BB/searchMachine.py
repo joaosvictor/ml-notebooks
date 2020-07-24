@@ -9,12 +9,13 @@ lcount= 1
 rcount= -1
 
 
+	
 # time execution O(n log n)
 searched=[]
 def machine(number,number2):
-	for i in range(99999999990):#generate numbers for the search.
+	for i in range(99999999990):#generate numbers for the search
 		nm = randint(0,999990)
-		print(nm)
+		print('halt:',nm,ncount)
 		while ncount > nm and lcount >= nm:
 			# jump to all current states possible
 			Math.sqrt(5,nm)
@@ -36,13 +37,13 @@ def machine(number,number2):
 							dp[i][k]=(dp[i][k]+number[i][j]*number2[j][k])%10
 							print(dp[j])
 		
-		while hcount < nm:
+		while hcount >  nm:
 			#nm.sort()
 			dp=[[0,0],[0,0]]
 			for i in range(1):
 				dp[i]=100
 				for j in range(1):
-					dp[i][j]=(dp[i][j]+number[i][j])+10
+					dp[i][j]=(dp[i][j]+dp[i][j])+10
 					print(dp)
 				
 def main():
