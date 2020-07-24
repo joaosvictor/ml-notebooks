@@ -14,6 +14,10 @@ def run(t0, ms=-1):
   pos = 15000
   s = "A"
 
+  
+  
+  #O(log n)
+  
   cnt = 0
   halt = True
   while 1:
@@ -108,4 +112,297 @@ if __name__ == "__main__":
     if halt:
       all_s = max(s, all_s)
       all_sigma = max(sigma, all_sigma)
- '''
+ graph = {}
+graph["start"] = {}
+graph["start"]["a"] = 6
+graph["start"]["b"] = 2
+
+graph["a"] = {}
+graph["a"]["end"] = 1
+
+graph["b"] = {}
+graph["b"]["a"] = 3
+graph["b"]["end"] = 5
+
+graph["end"] = {}
+
+# the costs table
+infinity = float("inf")
+costs = {}
+costs["a"] = 6
+costs["b"] = 2
+costs["end"] = infinity
+
+# the parents table
+parents = {}
+parents["a"] = "start"
+parents["b"] = "start"
+parents["end"] = None
+
+processed = []
+
+def find_lowest_cost_node(costs):
+    lowest_cost = float("inf")
+    lowest_cost_node = None
+    # Go through each node.
+    for node in costs:
+        cost = costs[node]
+        # If it's the lowest cost so far and hasn't been processed yet...
+        if cost < lowest_cost and node not in processed:
+            # ... set it as the new lowest-cost node.
+            lowest_cost = cost
+            lowest_cost_node = node
+    return lowest_cost_node
+
+# Find the lowest-cost node that you haven't processed yet.
+node = find_lowest_cost_node(costs)
+# If you've processed all the nodes, this while loop is done.
+while node is not None:
+    cost = costs[node]
+    # Go through all the neighbors of this node.
+    neighbors = graph[node]
+    for n in neighbors.keys():
+        new_cost = cost + neighbors[n]
+        # If it's cheaper to get to this neighbor by going through this node...
+        if costs[n] > new_cost:
+            # ... update the cost for this node.
+            costs[n] = new_cost
+            # This node becomes the new parent for this neighbor.
+            parents[n] = node
+    # Mark the node as processed.
+    processed.append(node)
+    # Find the next node to process, and loop.
+    node = find_lowest_cost_node(costs)
+
+print("Cost from the start to each node:")
+print(costs)
+
+
+class SQLAlchemy(object):
+    class Engine(object):
+        """Emulates SQLAlchemy look-a-like in our examples."""
+
+
+def create_engine(db_uri: str):
+    """Creates fake engine."""
+    return SQLAlchemy.Engine()
+
+
+@pytest.fixture(autouse=True)
+def setup_doctest_context(doctest_namespace):
+    """Here we register all classes that we use in our doctest examples."""
+    doctest_namespace["SQLAlchemy"] = SQLAlchemy
+    doctest_namespace["create_engine"] = 
+    
+    
+    from typing import List
+
+import pytest
+from expects import be, be_a, equal, expect, have_len
+from tempfile import NamedTemporaryFile
+import os
+from punq import (
+    Container,
+    Scope,
+    InvalidRegistrationException,
+    MissingDependencyException,
+)
+from tests.test_dependencies import (
+    FancyDbMessageWriter,
+    HelloWorldSpeaker,
+    MessageSpeaker,
+    MessageWriter,
+    StdoutMessageWriter,
+    TmpFileMessageWriter,
+    WrappingMessageWriter,
+)
+
+
+def test_can_create_instance_with_no_dependencies():
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter)
+    expect(container.resolve(MessageWriter)).to(be_a(StdoutMessageWriter))
+
+
+def test_dependencies_are_injected():
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter)
+    container.register(MessageSpeaker, HelloWorldSpeaker)
+
+    speaker = container.resolve(MessageSpeaker)
+
+    expect(speaker).to(be_a(HelloWorldSpeaker))
+    expect(speaker.writer).to(be_a(StdoutMessageWriter))
+
+
+def test_missing_dependencies_raise_exception():
+    container = Container()
+    container.register(MessageSpeaker, HelloWorldSpeaker)
+
+    with pytest.raises(MissingDependencyException):
+        container.resolve(MessageSpeaker)
+
+
+def test_can_register_a_concrete_type():
+    container = Container()
+    container.register(StdoutMessageWriter)
+
+    expect(container.resolve(StdoutMessageWriter)).to(be_a(StdoutMessageWriter))
+
+
+def test_can_register_with_a_custom_factory():
+    container = Container()
+    container.register(MessageWriter, lambda: "win")
+    container.register(MessageSpeaker, HelloWorldSpeaker)
+
+    speaker = container.resolve(MessageSpeaker)
+
+    expect(speaker).to(be_a(HelloWorldSpeaker))
+    expect(speaker.writer).to(equal("win"))
+
+
+def test_can_register_an_instance():
+    container = Container()
+    writer = TmpFileMessageWriter("my-file")
+    container.register(MessageWriter, instance=writer)
+    expect(container.resolve(MessageWriter)).to(equal(writer))
+
+
+def test_resolves_instances():
+    """
+    No scope specified should work the way transient scope works
+    """
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter)
+
+    mw1 = container.resolve(MessageWriter)
+    mw2 = container.resolve(MessageWriter)
+    expect(mw1).not_to(equal(mw2))
+
+
+def test_resolves_instances_with_singleton_scope():
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter, scope=Scope.singleton)
+
+    mw1 = container.resolve(MessageWriter)
+    mw2 = container.resolve(MessageWriter)
+    expect(mw1).to(equal(mw2))
+
+
+def test_resolves_instances_with_prototype_scope():
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter, scope=Scope.transient)
+
+    mw1 = container.resolve(MessageWriter)
+    mw2 = container.resolve(MessageWriter)
+    expect(mw1).not_to(equal(mw2))
+
+
+def test_registering_an_instance_as_concrete_is_exception():
+    """
+    Concrete registrations need to be a constructable type
+    or there's no key we can use for resolution.
+    """
+    container = Container()
+    writer = MessageWriter()
+
+    with pytest.raises(InvalidRegistrationException):
+        container.register(writer)
+
+
+def test_registering_an_instance_as_factory_is_exception():
+    """
+    Concrete registrations need to be a constructable type
+    or there's no key we can use for resolution.
+    """
+    container = Container()
+    writer = MessageWriter()
+
+    with pytest.raises(InvalidRegistrationException):
+        container.register(MessageWriter, writer)
+
+
+def test_registering_a_callable_as_concrete_is_exception():
+    """
+    Likewise, if we register an arbitrary callable, there's
+    no key by which we can later resolve, so we reject the
+    registration
+    """
+
+    container = Container()
+
+    with pytest.raises(InvalidRegistrationException):
+        container.register(lambda: "oops")
+
+
+def test_can_provide_arguments_to_registrations():
+    container = Container()
+    container.register(MessageWriter, FancyDbMessageWriter, cstr=lambda: "Hello world")
+
+    writer = container.resolve(MessageWriter)
+
+    expect(writer).to(be_a(FancyDbMessageWriter))
+    expect(writer.connection_string).to(equal("Hello world"))
+
+
+def test_can_provide_arguments_to_resolve():
+    container = Container()
+    container.register(MessageWriter, TmpFileMessageWriter)
+
+    instance = container.resolve(MessageWriter, path="foo")
+    expect(instance.path).to(equal("foo"))
+
+
+def test_can_provide_arguments_to_resolve_having_dependencies():
+    container = Container()
+    container.register(StdoutMessageWriter, StdoutMessageWriter)
+    container.register(MessageWriter, WrappingMessageWriter)
+
+    instance = container.resolve(MessageWriter, context="bar")
+    expect(instance.context).to(equal("bar"))
+
+
+def test_can_provide_typed_arguments_to_resolve():
+    container = Container()
+    container.register(MessageWriter, TmpFileMessageWriter)
+    container.register(TmpFileMessageWriter)
+    container.register(HelloWorldSpeaker)
+
+    tmpfile = NamedTemporaryFile()
+
+    writer = container.resolve(MessageWriter, path=tmpfile.name)
+    speaker = container.resolve(HelloWorldSpeaker, writer=writer)
+
+    speaker.speak()
+
+    tmpfile.seek(0)
+    expect(tmpfile.read().decode()).to(equal("Hello World"))
+
+
+def test_resolve_returns_the_latest_registration_for_a_service():
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter)
+
+    container.register(MessageWriter, TmpFileMessageWriter, path="my-file")
+
+    expect(container.resolve(MessageWriter)).to(be_a(TmpFileMessageWriter))
+
+
+def test_resolve_all_returns_all_registrations_in_order():
+    container = Container()
+    container.register(MessageWriter, StdoutMessageWriter)
+    container.register(MessageWriter, TmpFileMessageWriter, path="my-file")
+
+    [first, second] = container.resolve_all(MessageWriter)
+    expect(first).to(be_a(StdoutMessageWriter))
+    expect(second).to(be_a(TmpFileMessageWriter))
+
+
+def test_can_use_a_string_key():
+    container = Container()
+    container.register("foo", instance=1)
+    assert container.resolve("foo") == 1
+    '''
+
+
+
