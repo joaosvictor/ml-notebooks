@@ -8,6 +8,8 @@ hcount= -1
 lcount= 1
 rcount= -1
 
+
+# time execution O(n log n)
 searched=[]
 def machine(number,number2):
 	for i in range(99999999990):#generate numbers for the search.
