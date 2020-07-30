@@ -1,3 +1,4 @@
-sources of researches of data(science/analyses) and some ML.
-## Find in:
-[LINK of Busy Beaver](https://catonmat.net/busy-beaver) / [LINK of the Busy Beaver paper](https://arxiv.org/pdf/1610.03184.pdf)
+#### sources of researches of data(science/analyses) and some ML.
+### simple ML algorithms implemented in Python 3, TensorFlow 2, and Keras too
+
+#### If you'd like to request a notebook experiment, file an issue and maybe I'll do it.
