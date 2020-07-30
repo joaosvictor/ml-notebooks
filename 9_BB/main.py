@@ -1,3 +1,8 @@
+# read the challenge and come back here 
+# https://catonmat.net/busy-beaver
+
+# read the paper and come back here
+# https://arxiv.org/pdf/1610.03184.pdf
 MS = 4
 MAXS = 120
 
