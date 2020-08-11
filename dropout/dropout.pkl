@@ -1,0 +1,33 @@
+€csklearn.neighbors._classification
+KNeighborsClassifier
+q )q}q(X   n_neighborsqKX   radiusqNX	   algorithmqX   autoqX	   leaf_sizeqKX   metricqX	   minkowskiq	X
+   metric_paramsq
+NX   pqKX   n_jobsqNX   weightsq
+X   uniformqX   n_features_in_qKX   outputs_2d_q‰X   classes_qcjoblib.numpy_pickle
+NumpyArrayWrapper
+q)q}q(X   subclassqcnumpy
+ndarray
+qX   shapeqK…qX   orderqX   CqX   dtypeqcnumpy
+dtype
+qX   O8qK K‡qRq(KX   |q NNNJÿÿÿÿJÿÿÿÿK?tq!bX
+   allow_mmapq"‰ub€cnumpy.core.multiarray
+_reconstruct
+q cnumpy
+ndarray
+qK …qc_codecs
+encode
+qX   bqX   latin1q†qRq‡qRq	(KK…q
+cnumpy
+dtype
+qX   O8qK K‡q
+Rq(KX   |qNNNJÿÿÿÿJÿÿÿÿK?tqb‰]q(X   BrazilqX   United Stateqetqb.X   _yq#h)q$}q%(hhhK…q&hhhhX   i4q'K K‡q(Rq)(KX   <q*NNNJÿÿÿÿJÿÿÿÿK tq+bh"ˆub                            X   effective_metric_params_q,}q-X   effective_metric_q.X	   euclideanq/X   _fit_methodq0X   kd_treeq1X   _fit_Xq2h)q3}q4(hhhKK†q5hX   Fq6hhX   i8q7K K‡q8Rq9(Kh*NNNJÿÿÿÿJÿÿÿÿK tq:bh"ˆubÆ      Ð      Ú      ä      Æ      Ð      Ú      ä      @
+     `®
+     @B     €O     0W     ð+      5      Ö     X   n_samples_fit_q;KX   _treeq<csklearn.neighbors._kd_tree
+newObj
+q=csklearn.neighbors._kd_tree
+KDTree
+q>…q?Rq@(h)qA}qB(hhhKK†qChhhhX   f8qDK K‡qERqF(Kh*NNNJÿÿÿÿJÿÿÿÿK tqGbh"ˆub     Ÿ@     jA     @Ÿ@    À\%A     hŸ@    €„.A     Ÿ@    €O2A     Ÿ@    À\A     @Ÿ@    À¯A     hŸ@     j(A     Ÿ@     Ö3Ah)qH}qI(hhhK…qJhhhh9h"ˆub                                                         h)qK}qL(hhhK…qMhhhhX   V32qNK K‡qORqP(Kh N(X	   idx_startqQX   idx_endqRX   is_leafqSX   radiusqTtqU}qV(hQh9K †qWhRh9K†qXhSh9K†qYhThFK†qZuK KKtq[bh"ˆub                      hÏ àÈ Ah)q\}q](hhhKKK‡q^hhhhFh"ˆub     Ÿ@     jA     Ÿ@     Ö3AKKKK KK Kxcsklearn.neighbors._dist_metrics
+newObj
+q_csklearn.neighbors._dist_metrics
+EuclideanDistance
+q`…qaRqbG@       h)qc}qd(hhhK…qehhhhFh"ˆub        h)qf}qg(hhhKK†qhhhhhFh"ˆub        ‡qibNtqjbX   _sklearn_versionqkX   0.23.1qlub.
