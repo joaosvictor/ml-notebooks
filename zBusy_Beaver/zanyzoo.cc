@@ -1,4 +1,6 @@
 // (State, Input, Output, Direction, NewState)
+// read the paper and come back here
+// https://arxiv.org/pdf/1610.03184.pdf
 #include <vector>
 #include <queue>
 #include <cassert>
@@ -64,7 +66,6 @@ public:
     for (auto s : bwd) { if (s != 0) return false; }
     return true;
   }
-
   // these are copied when we copy the tape
   vector<int> fwd;
   vector<int> bwd;
@@ -119,7 +120,6 @@ public:
     }
     printf("\n");
   }
-
   bool operator <(const machine& m) const {
     return steps > m.steps;
   }
@@ -208,7 +208,6 @@ void generate() {
     mm = ms.top();
     ms.pop();
     mut.unlock();
-
     // step 3: execute M on the blank input until...
     while (true) {
       if (bc % 10000 == 0) {
