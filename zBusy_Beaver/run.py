@@ -1,4 +1,4 @@
-# 6 possible states
+# 6 possible states/
 # 2 values
 # 2 moves
 # 6*2*2 = 24
