@@ -294,6 +294,6 @@ int main() {
 
   printf("looking at %lu machines\n", out.size());
   /*for (auto mm : out) {
-    mm.print();
+    mm.print()
   }*/
 }
