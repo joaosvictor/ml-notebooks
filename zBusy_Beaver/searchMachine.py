@@ -13,7 +13,7 @@ rcount= -1
 # time execution O(n log n)
 searched=[]
 def machine(number,number2):
-	for i in range(99999999990):#generate numbers for the search
+	for i in range(99999999990):# generate numbers for the search;
 		nm = randint(0,999990)
 		print('halt:',nm,ncount)
 		while ncount > nm and lcount >= nm:
