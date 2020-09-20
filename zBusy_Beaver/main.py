@@ -1,5 +1,5 @@
 # read the challenge and come back here 
-# https://catonmat.net/busy-beaver
+# https://catonmat.net/busy-beaver//////not that one so far
 
 # read the paper and come back here
 # https://arxiv.org/pdf/1610.03184.pdf
