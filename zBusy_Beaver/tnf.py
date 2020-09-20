@@ -1,5 +1,5 @@
 # https://sci-hub.tw/10.1109/PGEC.1966.264572
-# Hmm, the tree normal form description is kind of annoying, it's a graph, right?
+
 # Oh, "Attacking the Busy Beaver 5" has a clearer description
 # Does the first move need to print a one?
 
