@@ -23,7 +23,7 @@ def machine(number,number2):
 			if nm==max(ncount):
 				ans+=1
 				print(ans)
-		#process to find lost number
+		# process to find lost number
 		for j in range(rcount):
 			ans = nm.popleft()
 			if ans not in searched:
@@ -38,12 +38,12 @@ def machine(number,number2):
 							print(dp[j])
 		
 		while hcount >  nm:
-			#nm.sort()
+			# nm.sort()
 			dp=[[0,0],[0,0]]
 			for i in range(1):
 				dp[i]=100
 				for j in range(1):
-					dp[i][j]=(dp[i][j]+dp[i][j])+10
+					dp[i][j]=(dp[i][j]+dp[i][j])+15
 					print(dp)
 				
 def main():
