@@ -13,5 +13,6 @@ pip install seaborn
 pip install scikit-learn
 pip install tensorflow
 pip install joblib
+pip install torch torchvision
 ```
 -----
